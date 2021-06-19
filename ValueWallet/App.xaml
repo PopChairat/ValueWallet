@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ValueWallet.App">
+    <Application.Resources>
+        <!--Them Color-->
+         <ResourceDictionary>
+             <Color x:Key="YellowMs">#FEC42D</Color>
+             <Color x:Key="BlueMs">#0B33F9</Color>
+             <Color x:Key="BlueBackground">#EAEFFF</Color>
+             <Color x:Key="RedCherry">#D80027</Color>
+         </ResourceDictionary>
+    </Application.Resources>
+</Application>

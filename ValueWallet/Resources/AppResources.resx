@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<data name="TitleOnBoardingStep1" xml:space="preserve">
+    <value>Leading Payment Application</value>
+	</data>
+	<data name="DetailOnBoardingStep1" xml:space="preserve">
+    <value>More than 100 million users with 1,000 thousand partners and services in the world</value>
+	</data>
+	<data name="TitleOnBoardingStep2" xml:space="preserve">
+    <value>Prestige and Absolute
+		Security</value>
+	</data>
+	<data name="DetailOnBoardingStep2" xml:space="preserve">
+    <value>Licensed by all banks in the world &amp; secured with multi-tier PCI-DSS international standards</value>
+	</data>
+	<data name="TitleOnBoardingStep3" xml:space="preserve">
+    <value>Receive "Hot" Gifts from Value Wallet Right Away</value>
+	</data>
+	<data name="DetailOnBoardingStep3" xml:space="preserve">
+    <value>Sign up now to receive a large gift pack. Eating, watching movies &amp; many other services.</value>
+	</data>
+</root>

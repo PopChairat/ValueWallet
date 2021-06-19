@@ -1,0 +1,65 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\IRuntimeService\" />
+    <Folder Include="Services\CoreService\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Models\" />
+    <Folder Include="ViewModels\" />
+    <Folder Include="Views\" />
+    <Folder Include="Images\" />
+    <Folder Include="Views\Welcome\" />
+    <Folder Include="Images\OnboardImg\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Resources\" />
+    <None Remove="Models\" />
+    <None Remove="ViewModel\" />
+    <None Remove="Views\" />
+    <None Remove="Images\" />
+    <None Remove="Views\Welcome\" />
+    <None Remove="Images\OnboardImg\" />
+    <None Remove="Images\OnboardImg\LogoW.png" />
+    <None Remove="Images\OnboardImg\VmString.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Images\OnboardImg\LogoW.png" />
+    <EmbeddedResource Include="Images\OnboardImg\VmString.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Resources\AppResources.th.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.th.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Resources\AppResources.Designer.cs">
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\AppResources.th.Designer.cs">
+      <DependentUpon>AppResources.th.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
