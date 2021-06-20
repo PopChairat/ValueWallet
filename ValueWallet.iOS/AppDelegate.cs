@@ -25,12 +25,41 @@ namespace ValueWallet.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-
-
+            DeviceInfo.CurrentDevice = GetDeviceInfo();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
 
+        private DeviceInfo GetDeviceInfo()
+        {
+            DeviceInfo deviceInfo = new(Platform.iOS);
 
+            string sysVer = UIDevice.CurrentDevice.SystemVersion;
+            deviceInfo.OSVersion = $"iOS {sysVer}";
+            deviceInfo.DeviceName = RuntimeService.DeviceHardware.Model;
+            deviceInfo.AppVersion = RuntimeService.DeviceHardware.Version;
+            //deviceInfo.AppVersion = NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleShortVersionString").ToString();
+            //deviceInfo.DeviceName = UIDevice.CurrentDevice.Name;
+
+            deviceInfo.ScreenScale = UIScreen.MainScreen.Scale;
+            deviceInfo.ScreenWidth = UIScreen.MainScreen.Bounds.Size.Width;
+            deviceInfo.ScreenHeight = UIScreen.MainScreen.Bounds.Size.Height;
+            deviceInfo.ScreenWidthPixels = deviceInfo.ScreenWidth * deviceInfo.ScreenScale;
+            deviceInfo.ScreenHeightPixels = deviceInfo.ScreenHeight * deviceInfo.ScreenScale;
+
+            //Check Authenticate Biometrics
+            if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
+            {
+                LocalAuthentication.LAContext context = new LocalAuthentication.LAContext();
+                NSError authError;
+                deviceInfo.IsSupportAuthBio = context.CanEvaluatePolicy(LocalAuthentication.LAPolicy.DeviceOwnerAuthenticationWithBiometrics, out authError);
+                deviceInfo.IsAuthBioEnable = (deviceInfo.IsSupportAuthBio || (LocalAuthentication.LAStatus)Convert.ToInt16(authError.Code) != LocalAuthentication.LAStatus.TouchIDNotAvailable);
+            }
+
+
+            return deviceInfo;
+        }
+
+    }
 }

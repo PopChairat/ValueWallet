@@ -8,6 +8,7 @@ namespace ValueWallet.Services.CoreService
         {
             CurrentPlatform = platform;
         }
+
         //single ton
         public static DeviceInfo CurrentDevice { get; set; }
 
@@ -15,7 +16,13 @@ namespace ValueWallet.Services.CoreService
         public bool IsNotchIosDevice { get; set; } = false;
         public string OSVersion { get; set; }
         public string AppVersion { get; set; }
-        public string Model { get; set; }
         public string DeviceName { get; set; }
+        public double ScreenScale { get; set; }
+        public double ScreenWidth { get; set; }
+        public double ScreenWidthPixels { get; set; }
+        public double ScreenHeightPixels { get; set; }
+        public double ScreenHeight { get; set; }
+        public bool IsSupportAuthBio { get; set; }
+        public bool IsAuthBioEnable { get; set; }
     }
 }
