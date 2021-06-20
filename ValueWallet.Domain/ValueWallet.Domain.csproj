@@ -1,25 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Entities\" />
+    <None Remove="IRepositories\" />
+    <None Remove="IServices\" />
+    <None Remove="Services\" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\" />
     <Folder Include="IRepositories\" />
     <Folder Include="IServices\" />
     <Folder Include="Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="IRepositories\" />
-    <None Remove="IService\" />
-    <None Remove="Service\" />
   </ItemGroup>
 </Project>

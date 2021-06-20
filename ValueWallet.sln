@@ -20,8 +20,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{DA710EA3-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{D1D8F872-82AD-4ADE-8F47-8B9A95106F14}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueWallet.Domain", "ValueWallet.Domain\ValueWallet.Domain.csproj", "{74974B0F-256B-4611-BAC0-A210BB69C696}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueWallet.Data", "ValueWallet.Data\ValueWallet.Data.csproj", "{893BDF5B-D776-4054-BBE4-BF8523B09882}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueWallet.Android", "ValueWallet.Android\ValueWallet.Android.csproj", "{6727E861-AE7E-455D-8D1A-54CFE6B57900}"
@@ -31,6 +29,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueWallet", "ValueWallet\ValueWallet.csproj", "{90DC1F48-0532-4F66-91B0-3350931E7F62}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueWallet.Api", "ValueWallet.Api\ValueWallet.Api.csproj", "{31937EF9-5BE7-4D99-A499-F0BD425760C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ValueWallet.Domain", "ValueWallet.Domain\ValueWallet.Domain.csproj", "{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,18 +42,6 @@ Global
 		Release|iPhoneSimulator = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|anycpu.ActiveCfg = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|anycpu.Build.0 = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|anycpu.ActiveCfg = Release|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|anycpu.Build.0 = Release|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|iPhone.Build.0 = Release|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{74974B0F-256B-4611-BAC0-A210BB69C696}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{893BDF5B-D776-4054-BBE4-BF8523B09882}.Debug|anycpu.ActiveCfg = Debug|Any CPU
 		{893BDF5B-D776-4054-BBE4-BF8523B09882}.Debug|anycpu.Build.0 = Debug|Any CPU
 		{893BDF5B-D776-4054-BBE4-BF8523B09882}.Debug|iPhone.ActiveCfg = Debug|Any CPU
@@ -115,6 +103,18 @@ Global
 		{31937EF9-5BE7-4D99-A499-F0BD425760C1}.Release|iPhone.Build.0 = Release|Any CPU
 		{31937EF9-5BE7-4D99-A499-F0BD425760C1}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{31937EF9-5BE7-4D99-A499-F0BD425760C1}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|anycpu.ActiveCfg = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|anycpu.Build.0 = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|anycpu.ActiveCfg = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|anycpu.Build.0 = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|iPhone.Build.0 = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -125,12 +125,12 @@ Global
 		{7D704381-B642-4AC5-899F-4B3CE5E7D44C} = {1565EC25-E8C0-4896-95C8-3A6B182ADFE7}
 		{DA710EA3-5E43-4D9F-BD0F-032B64E53F4B} = {BDC433F0-44FA-4055-BC62-0203064DBA36}
 		{D1D8F872-82AD-4ADE-8F47-8B9A95106F14} = {BDC433F0-44FA-4055-BC62-0203064DBA36}
-		{74974B0F-256B-4611-BAC0-A210BB69C696} = {DA710EA3-5E43-4D9F-BD0F-032B64E53F4B}
 		{893BDF5B-D776-4054-BBE4-BF8523B09882} = {D1D8F872-82AD-4ADE-8F47-8B9A95106F14}
 		{6727E861-AE7E-455D-8D1A-54CFE6B57900} = {7D704381-B642-4AC5-899F-4B3CE5E7D44C}
 		{AF0B0B1B-D536-4423-A17F-E5FFC9C1499B} = {7D704381-B642-4AC5-899F-4B3CE5E7D44C}
 		{90DC1F48-0532-4F66-91B0-3350931E7F62} = {7D704381-B642-4AC5-899F-4B3CE5E7D44C}
 		{31937EF9-5BE7-4D99-A499-F0BD425760C1} = {173A90CA-3667-49B4-99C0-61B59C827A20}
+		{387706EC-4A00-4CD7-BB0E-5CEE53081AA8} = {DA710EA3-5E43-4D9F-BD0F-032B64E53F4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {264CADAF-E23B-4C76-B865-8CFAE777DB61}
