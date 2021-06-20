@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 
 using Foundation;
 using UIKit;
 using ValueWallet.Models;
-using ValueWallet.Services.CoreService;
 
 namespace ValueWallet.iOS
 {
@@ -37,8 +34,10 @@ namespace ValueWallet.iOS
 
             string sysVer = UIDevice.CurrentDevice.SystemVersion;
             deviceInfo.OSVersion = $"iOS {sysVer}";
-            deviceInfo.DeviceName = RuntimeService.DeviceHardware.Model;
+            deviceInfo.OSCode = sysVer;
+            deviceInfo.DeviceModel = RuntimeService.DeviceHardware.Model;
             deviceInfo.AppVersion = RuntimeService.DeviceHardware.Version;
+            deviceInfo.Brand = "Apple";
             //deviceInfo.AppVersion = NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleShortVersionString").ToString();
             //deviceInfo.DeviceName = UIDevice.CurrentDevice.Name;
 

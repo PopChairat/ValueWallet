@@ -13,6 +13,7 @@ namespace ValueWallet.Domain.Entities
         None = 0,
         Password = 1,
         Fingerprint = 2,
-        FaceId = 3
+        FaceId = 3,
+        BiometricDroid = 4
     }
 }
