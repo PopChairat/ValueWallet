@@ -107,6 +107,7 @@
   <ItemGroup>
     <Folder Include="RuntimeService\" />
     <Folder Include="ViewRenderer\" />
+    <Folder Include="Resources\Assets.xcassets\Logo.imageset\" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
@@ -133,6 +134,10 @@
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreen.imageset\100- welcome%403x.png" />
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreen.imageset\100- welcome%402x.png" />
     <ImageAsset Include="Resources\Assets.xcassets\LaunchScreen.imageset\100- welcome.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Logo.imageset\Contents.json" />
+    <ImageAsset Include="Resources\Assets.xcassets\Logo.imageset\Component 1191 – 1.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Logo.imageset\Component 1191 – 1%402x.png" />
+    <ImageAsset Include="Resources\Assets.xcassets\Logo.imageset\Component 1191 – 1%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
