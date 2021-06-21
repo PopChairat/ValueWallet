@@ -1,10 +1,10 @@
-﻿using System;
-namespace ValueWallet.Domain.Entities
+﻿namespace ValueWallet.Domain.Entities
 {
     public enum StatusCode
     {
         Success = 1000,
-        UnSucess = 2000,
+        Fail = 2000,
+        Error = 3000,
         Unknow = 9999
     }
 
@@ -14,6 +14,7 @@ namespace ValueWallet.Domain.Entities
         Password = 1,
         Fingerprint = 2,
         FaceId = 3,
-        BiometricDroid = 4
+        BiometricDroid = 4,
+        PassCode = 5
     }
 }

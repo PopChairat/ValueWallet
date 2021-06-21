@@ -1,5 +1,5 @@
 ﻿using System;
-using ValueWallet.Views.Welcome;
+using ValueWallet.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,7 +11,9 @@ namespace ValueWallet
         {
             InitializeComponent();
 
-            MainPage = new OnBoardingPage();
+            //MainPage = new OnBoardingPage();
+
+            MainPage = new MyPage();
         }
 
         protected override void OnStart()
