@@ -33,12 +33,15 @@ namespace ValueWallet.Droid.RuntimeService
         string DecryptData(byte[] ciphertext, Cipher cipher);
     }
 
-    internal class CryptographyManager : ICryptographyManager
+    public class CryptographyManager : ICryptographyManager
     {
         private readonly int KEY_SIZE = 256;
-        private readonly string ANDROID_KEYSTORE = "AndroidKeyStore";
+        private readonly string ANDROID_KEYSTORE = "21qialpDopWdS2Gf2Qk9bvApNaiBCFtT2Eho+FGdF5o=";   //สวัสดีป๊อป#1
         private readonly string ENCRYPTION_BLOCK_MODE = KeyProperties.BlockModeGcm;
-        private readonly string ENCRYPTION_PADDING = KeyProperties.EncryptionPaddingNone;
+        private static readonly string KEY_ALGORITHM = KeyProperties.KeyAlgorithmAes;
+        private static readonly string BLOCK_MODE = KeyProperties.BlockModeCbc;
+        private static readonly string ENCRYPTION_PADDING = KeyProperties.EncryptionPaddingPkcs7;
+        private static readonly string TRANSFORMATION = KEY_ALGORITHM + "/" +BLOCK_MODE + "/" + ENCRYPTION_PADDING;
         //private string ENCRYPTION_ALGORITHM = KeyProperties.KeyAlgorithmAes;
 
         public string DecryptData(byte[] ciphertext, Cipher cipher)
@@ -75,8 +78,7 @@ namespace ValueWallet.Droid.RuntimeService
 
         private Cipher GetCipher()
         {
-            string transformation = "$ENCRYPTION_ALGORITHM/$ENCRYPTION_BLOCK_MODE/$ENCRYPTION_PADDING";
-            return Cipher.GetInstance(transformation);
+            return Cipher.GetInstance(TRANSFORMATION);
         }
 
 
