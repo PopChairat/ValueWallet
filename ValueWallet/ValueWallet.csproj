@@ -18,6 +18,7 @@
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\IRuntimeService\" />
@@ -41,6 +42,7 @@
     <None Remove="Images\OnboardImg\LogoW.png" />
     <None Remove="Images\OnboardImg\VmString.png" />
     <None Remove="Newtonsoft.Json" />
+    <None Remove="Plugin.Fingerprint" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\OnboardImg\LogoW.png" />

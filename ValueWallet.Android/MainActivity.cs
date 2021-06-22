@@ -7,49 +7,44 @@ using Android.OS;
 using Android.Views;
 using ValueWallet.Models;
 using Android.Util;
+using Plugin.Fingerprint;
+using System.Threading.Tasks;
+using Android.Hardware.Fingerprints;
 using Android.Content;
-using AndroidX.Core.Hardware.Fingerprint;
-using Android;
 
 namespace ValueWallet.Droid
 {
-    [Activity(Label = "Value Wallet", Theme = "@style/splashscreen", Icon = "@mipmap/icon", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTop)]
+    [Activity(Label = "Value Wallet", Theme = "@style/splashscreen", Icon = "@mipmap/icon", MainLauncher = true, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTop)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
-            Window.RequestFeature(WindowFeatures.NoTitle);
-            Window.AddFlags(WindowManagerFlags.Fullscreen);
-            Window.AddFlags(WindowManagerFlags.LayoutInOverscan);
-            Window.SetStatusBarColor(Android.Graphics.Color.Transparent);
-
             base.SetTheme(Resource.Style.MainTheme);
             base.OnCreate(savedInstanceState);
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            CrossFingerprint.SetCurrentActivityResolver(() => Xamarin.Essentials.Platform.CurrentActivity);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             if (Build.VERSION.SdkInt >= BuildVersionCodes.P)
             {
                 Window.Attributes.LayoutInDisplayCutoutMode
-                = LayoutInDisplayCutoutMode.ShortEdges;
+                = LayoutInDisplayCutoutMode.Never;
             }
 
-            Context context = ;
-
-            DeviceInfo.CurrentDevice = GetDeviceInfo(context);
+            DeviceInfo.CurrentDevice = GetDeviceInfo();
 
             LoadApplication(new App());
         }
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private DeviceInfo GetDeviceInfo(Context context)
+        private DeviceInfo GetDeviceInfo()
         {
             DeviceInfo deviceInfo = new(Platform.Android);
 
@@ -71,37 +66,42 @@ namespace ValueWallet.Droid
             deviceInfo.ScreenHeight = metrics.HeightPixels / metrics.Density;
 
             //Check Authenticate Biometrics
+            deviceInfo.IsSupportAuthBio = IsSupportBioCheck();
 
-            if(versionOS >= BuildVersionCodes.M)
+            Task.Run(async () =>
             {
-                //BiometricPrompt
-            }
-            else
-            {
-                // Using the Android Support Library v4
-                FingerprintManagerCompat fingerprintManager = FingerprintManagerCompat.From(context);
-
-                deviceInfo.IsSupportAuthBio = fingerprintManager.IsHardwareDetected;
-
-                // The context is typically a reference to the current activity.
-                Permission permissionResult = AndroidX.Core.Content.ContextCompat.CheckSelfPermission(context, Manifest.Permission.UseFingerprint);
-                if (permissionResult == Permission.Granted && fingerprintManager.HasEnrolledFingerprints)
-                {
-                    // Permission granted - go ahead and start the fingerprint scanner.
-                    deviceInfo.IsAuthBioEnable = true;
-                }
-                else
-                {
-                    // No permission. Go and ask for permissions and don't start the scanner. See
-                    // https://developer.android.com/training/permissions/requesting.html
-
-                    deviceInfo.IsAuthBioEnable = false;
-                }
-
-            }
+                deviceInfo.IsAuthBioEnable = await CrossFingerprint.Current.IsAvailableAsync();
+            });
 
             return deviceInfo;
 
+        }
+
+        public bool IsSupportBioCheck()
+        {
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
+            {
+                // Using API level 23:
+                FingerprintManager fingerprintManager = GetSystemService(Context.FingerprintService) as FingerprintManager;
+
+                if (!fingerprintManager.IsHardwareDetected || !fingerprintManager.HasEnrolledFingerprints)
+                {
+                    return false;
+                }
+
+            }
+            else
+            {
+                return false;
+            }
+
+            KeyguardManager keyguardManager = (KeyguardManager)GetSystemService(Context.KeyguardService);
+            if (!keyguardManager.IsKeyguardSecure)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
