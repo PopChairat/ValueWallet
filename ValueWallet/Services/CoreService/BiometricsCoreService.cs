@@ -24,11 +24,6 @@ namespace ValueWallet.Services.CoreService
             return DependencyService.Get<IBiometricsService>().IsBioPermissionGranted();
         }
 
-        public static LoginBy IsCanUseBiometric()
-        {
-            return DependencyService.Get<IBiometricsService>().DeviceCanLoginBy();
-        }
-
         public static void RemoveUserLogin()
         {
             DependencyService.Get<IBiometricsService>().RemoveUserLogin();

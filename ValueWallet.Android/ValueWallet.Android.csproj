@@ -38,6 +38,7 @@
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+<AndroidSupportedAbis>armeabi-v7a;arm64-v8a;x86;x86_64</AndroidSupportedAbis>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -78,9 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewRenderer\CustomTypefaceSpan.cs" />
     <Compile Include="ViewRenderer\LabelCustomRenderer.cs" />
-    <Compile Include="RuntimeService\BiometricService.cs" />
     <Compile Include="RuntimeService\ICryptographyManager.cs" />
     <Compile Include="DroidModels\EncryptedData.cs" />
+    <Compile Include="RuntimeService\BiometricsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\EkkamaiNewBold.ttf" />

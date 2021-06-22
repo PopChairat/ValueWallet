@@ -6,7 +6,6 @@ namespace ValueWallet.Services.IRuntimeService
 {
     public interface IBiometricsService
     {
-        LoginBy DeviceCanLoginBy();
         bool IsBioPermissionGranted();
         Task<bool> AuthenticateBiometric();
         Task<BioProfileEntity> GetPassword();
