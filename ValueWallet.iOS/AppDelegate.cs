@@ -1,8 +1,9 @@
 ﻿using System;
-
+using System.Threading.Tasks;
 using Foundation;
 using UIKit;
 using ValueWallet.Models;
+using Xamarin.Essentials;
 
 namespace ValueWallet.iOS
 {
@@ -22,15 +23,15 @@ namespace ValueWallet.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            DeviceInfo.CurrentDevice = GetDeviceInfo();
+            LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
 
-        private DeviceInfo GetDeviceInfo()
+        private LocalDeviceInfo GetDeviceInfo()
         {
-            DeviceInfo deviceInfo = new(Platform.iOS);
+            LocalDeviceInfo deviceInfo = new(Models.Platform.iOS);
 
             string sysVer = UIDevice.CurrentDevice.SystemVersion;
             deviceInfo.OSVersion = $"iOS {sysVer}";

@@ -7,4 +7,17 @@
         Android = 2
     }
 
+    public enum KeyAppType
+    {
+        None,
+        KeySecret,
+        UserInfo,
+    }
+
+    public enum AlertLevel
+    {
+        Normal,
+        Warning,
+        Error
+    }
 }

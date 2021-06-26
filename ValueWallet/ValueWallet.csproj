@@ -19,9 +19,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Plugin.Fingerprint" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\IRuntimeService\" />
+    <Folder Include="Services\IService\" />
     <Folder Include="Services\CoreService\" />
     <Folder Include="Resources\" />
     <Folder Include="Models\" />
@@ -30,6 +31,9 @@
     <Folder Include="Images\" />
     <Folder Include="Views\Welcome\" />
     <Folder Include="Images\OnboardImg\" />
+    <Folder Include="Views\CommonViews\" />
+    <Folder Include="ViewModels\CommonLogics\" />
+    <Folder Include="Views\LoginNRegister\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\" />
@@ -43,6 +47,10 @@
     <None Remove="Images\OnboardImg\VmString.png" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Plugin.Fingerprint" />
+    <None Remove="Views\CommonViews\" />
+    <None Remove="ViewModels\CommonLogics\" />
+    <None Remove="Views\LoginNRegister\" />
+    <None Remove="Microsoft.Extensions.DependencyInjection" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\OnboardImg\LogoW.png" />

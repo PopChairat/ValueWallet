@@ -11,7 +11,7 @@ namespace ValueWallet
         {
             InitializeComponent();
 
-            MainPage = new Views.Welcome.OnBoardingPage();
+            MainPage = new Views.LoginNRegister.LoginNewUserPage();
         }
 
         protected override void OnStart()

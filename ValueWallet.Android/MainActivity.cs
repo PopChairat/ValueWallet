@@ -11,6 +11,8 @@ using Plugin.Fingerprint;
 using System.Threading.Tasks;
 using Android.Hardware.Fingerprints;
 using Android.Content;
+using Xamarin.Essentials;
+using ValueWallet.Droid.RuntimeService;
 
 namespace ValueWallet.Droid
 {
@@ -32,7 +34,8 @@ namespace ValueWallet.Droid
                 = LayoutInDisplayCutoutMode.Never;
             }
 
-            DeviceInfo.CurrentDevice = GetDeviceInfo();
+            LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
+            InitialApp();
 
             LoadApplication(new App());
         }
@@ -44,9 +47,9 @@ namespace ValueWallet.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private DeviceInfo GetDeviceInfo()
+        private LocalDeviceInfo GetDeviceInfo()
         {
-            DeviceInfo deviceInfo = new(Platform.Android);
+            LocalDeviceInfo deviceInfo = new(Models.Platform.Android);
 
             BuildVersionCodes versionOS = Build.VERSION.SdkInt;
 
@@ -71,13 +74,17 @@ namespace ValueWallet.Droid
             Task.Run(async () =>
             {
                 deviceInfo.IsAuthBioEnable = await CrossFingerprint.Current.IsAvailableAsync();
+
+                deviceInfo.IsSupportSecureStorage = await IsSupportSecureStorage();
+
+                InitialKeyApp();
             });
 
             return deviceInfo;
 
         }
 
-        public bool IsSupportBioCheck()
+        private bool IsSupportBioCheck()
         {
             if (Build.VERSION.SdkInt >= BuildVersionCodes.O)
             {
@@ -102,6 +109,29 @@ namespace ValueWallet.Droid
             }
 
             return true;
+        }
+
+        private async ValueTask<bool> IsSupportSecureStorage()
+        {
+            try
+            {
+                string oauthToken = await SecureStorage.GetAsync("oauth_token");
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+                return false;
+            }
+        }
+
+        private async void InitialKeyApp()
+        {
+            if (LocalDeviceInfo.CurrentDevice.IsSupportSecureStorage)
+            {
+                await SecureStorage.SetAsync(KeyAppType.KeySecret.ToString(), "IamChairat");
+            }
         }
     }
 }
