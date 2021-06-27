@@ -22,6 +22,7 @@
         public string OSVersion { get; set; }
         public string AppVersion { get; set; }
         public string DeviceModel { get; set; }
+        public string DeviceID { get; set; }
         public string ID2 { get; set; }
 
         public double ScreenScale { get; set; }
