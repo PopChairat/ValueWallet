@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -12,7 +11,6 @@ using System.Threading.Tasks;
 using Android.Hardware.Fingerprints;
 using Android.Content;
 using Xamarin.Essentials;
-using ValueWallet.Droid.RuntimeService;
 
 namespace ValueWallet.Droid
 {
@@ -35,7 +33,6 @@ namespace ValueWallet.Droid
             }
 
             LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
-            InitialApp();
 
             LoadApplication(new App());
         }
@@ -76,8 +73,6 @@ namespace ValueWallet.Droid
                 deviceInfo.IsAuthBioEnable = await CrossFingerprint.Current.IsAvailableAsync();
 
                 deviceInfo.IsSupportSecureStorage = await IsSupportSecureStorage();
-
-                InitialKeyApp();
             });
 
             return deviceInfo;
@@ -123,14 +118,6 @@ namespace ValueWallet.Droid
             {
                 // Possible that device doesn't support secure storage on device.
                 return false;
-            }
-        }
-
-        private async void InitialKeyApp()
-        {
-            if (LocalDeviceInfo.CurrentDevice.IsSupportSecureStorage)
-            {
-                await SecureStorage.SetAsync(KeyAppType.KeySecret.ToString(), "IamChairat");
             }
         }
     }
