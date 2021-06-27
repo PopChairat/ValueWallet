@@ -2,21 +2,16 @@
 using System.Threading.Tasks;
 using ValueWallet.Domain.Entities;
 using ValueWallet.Models;
-using ValueWallet.Services.IRuntimeService;
+using ValueWallet.Services.IService;
 using Xamarin.Forms;
 
 namespace ValueWallet.Services.CoreService
 {
-    public class BiometricsCoreService
+    public class BiometricsService
     {
-        public static Task<bool> AuthenticateBiometric()
-        {
-            return DependencyService.Get<IBiometricsService>().AuthenticateBiometric();
-        }
-
         public static Task<BioProfileEntity> GetPassword()
         {
-            return DependencyService.Get<IBiometricsService>().GetPassword();
+            return DependencyService.Get<IBiometricsService>().GetSecretBio();
         }
 
         public static bool IsBioPermissionGranted()
@@ -29,9 +24,17 @@ namespace ValueWallet.Services.CoreService
             DependencyService.Get<IBiometricsService>().RemoveUserLogin();
         }
 
-        public static void SetUserLogin(string username, string password, int loginType)
+        public static void SetUserLogin(string username, string password, LoginBy loginType)
         {
-            DependencyService.Get<IBiometricsService>().SetUserLogin(username, password, loginType);
+            try
+            {
+                BioProfileEntity userInfo = new BioProfileEntity() { Username = username, Password = password, LoginBy = loginType };
+                DependencyService.Get<IBiometricsService>().SetUserLogin(userInfo);
+            }
+            catch(Exception ex)
+            {
+               
+            }
         }
     }
 }

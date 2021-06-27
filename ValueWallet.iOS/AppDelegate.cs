@@ -57,8 +57,28 @@ namespace ValueWallet.iOS
                 deviceInfo.IsAuthBioEnable = (deviceInfo.IsSupportAuthBio || (LocalAuthentication.LAStatus)Convert.ToInt16(authError.Code) != LocalAuthentication.LAStatus.TouchIDNotAvailable);
             }
 
+            Task.Run(async () =>
+            {
+                deviceInfo.IsSupportSecureStorage = await IsSupportSecureStorage();
+
+            });
 
             return deviceInfo;
+        }
+
+        private async ValueTask<bool> IsSupportSecureStorage()
+        {
+            try
+            {
+                string oauthToken = await SecureStorage.GetAsync("oauth_token");
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Possible that device doesn't support secure storage on device.
+                return false;
+            }
         }
 
     }

@@ -79,6 +79,7 @@
     <BundleResource Include="Resources\Fonts\EkkamaiNew.ttf" />
     <Compile Include="ViewRenderer\CustomPageRenderer.cs" />
     <Compile Include="RuntimeService\DeviceHardware.cs" />
+    <Compile Include="RuntimeService\BiometricsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
