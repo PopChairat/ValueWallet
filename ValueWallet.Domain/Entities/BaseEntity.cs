@@ -1,5 +1,4 @@
-﻿using System;
-namespace ValueWallet.Domain.Entities
+﻿namespace ValueWallet.Domain.Entities
 {
     public class BaseEntity
     {

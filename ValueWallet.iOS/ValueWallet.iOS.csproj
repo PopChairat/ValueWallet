@@ -79,6 +79,7 @@
     <BundleResource Include="Resources\Fonts\EkkamaiNew.ttf" />
     <Compile Include="ViewRenderer\CustomPageRenderer.cs" />
     <Compile Include="RuntimeService\DeviceHardware.cs" />
+    <Compile Include="RuntimeService\BiometricsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -96,6 +97,9 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Plugin.Fingerprint">
+      <Version>2.1.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
