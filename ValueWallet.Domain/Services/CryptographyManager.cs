@@ -14,11 +14,6 @@ namespace ValueWallet.Domain.Services
         //todo Set Salt
         private byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        public CryptographyManager()
-        {
-
-        }
-
         public string DecryptData(string text)
         {
             return DecryptString(text);
@@ -27,6 +22,16 @@ namespace ValueWallet.Domain.Services
         public string EncryptData(string text)
         {
             return EncryptString(text);
+        }
+
+        private void SetVectorKey()
+        {
+
+        }
+
+        private void SetKey()
+        {
+
         }
 
         private string EncryptString(string text)
