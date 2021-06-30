@@ -23,30 +23,15 @@ namespace ValueWallet.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
+            LocalDeviceInfo.CurrentDevice = GetLocalDeviceInfo();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
 
-        private LocalDeviceInfo GetDeviceInfo()
+        private LocalDeviceInfo GetLocalDeviceInfo()
         {
             LocalDeviceInfo deviceInfo = new(Models.Platform.iOS);
-
-            string sysVer = UIDevice.CurrentDevice.SystemVersion;
-            deviceInfo.OSVersion = $"iOS {sysVer}";
-            deviceInfo.OSCode = sysVer;
-            deviceInfo.DeviceModel = RuntimeService.DeviceHardware.Model;
-            deviceInfo.AppVersion = RuntimeService.DeviceHardware.Version;
-            deviceInfo.Brand = "Apple";
-            //deviceInfo.AppVersion = NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleShortVersionString").ToString();
-            //deviceInfo.DeviceName = UIDevice.CurrentDevice.Name;
-
-            deviceInfo.ScreenScale = UIScreen.MainScreen.Scale;
-            deviceInfo.ScreenWidth = UIScreen.MainScreen.Bounds.Size.Width;
-            deviceInfo.ScreenHeight = UIScreen.MainScreen.Bounds.Size.Height;
-            deviceInfo.ScreenWidthPixels = deviceInfo.ScreenWidth * deviceInfo.ScreenScale;
-            deviceInfo.ScreenHeightPixels = deviceInfo.ScreenHeight * deviceInfo.ScreenScale;
 
             //Check Authenticate Biometrics
             if (UIDevice.CurrentDevice.CheckSystemVersion(8, 0))
@@ -63,9 +48,81 @@ namespace ValueWallet.iOS
 
             });
 
+            string sysVer = UIDevice.CurrentDevice.SystemVersion;
+            deviceInfo.OSVersion = $"iOS {sysVer}";
+            deviceInfo.OSCode = sysVer;
+            deviceInfo.DeviceModel = RuntimeService.DeviceHardware.Model;
+            deviceInfo.AppVersion = RuntimeService.DeviceHardware.Version;
+            deviceInfo.Brand = "Apple";
+            //deviceInfo.AppVersion = NSBundle.MainBundle.ObjectForInfoDictionary("CFBundleShortVersionString").ToString();
+            //deviceInfo.DeviceName = UIDevice.CurrentDevice.Name;
+
+            deviceInfo.ScreenScale = UIScreen.MainScreen.Scale;
+            deviceInfo.ScreenWidth = UIScreen.MainScreen.Bounds.Size.Width;
+            deviceInfo.ScreenHeight = UIScreen.MainScreen.Bounds.Size.Height;
+            deviceInfo.ScreenWidthPixels = deviceInfo.ScreenWidth * deviceInfo.ScreenScale;
+            deviceInfo.ScreenHeightPixels = deviceInfo.ScreenHeight * deviceInfo.ScreenScale;
+
+
+            string deviceID = UIDevice.CurrentDevice.IdentifierForVendor.AsString();
+            string defaultDeviceID = "";
+           
+            if (!string.IsNullOrEmpty(defaultDeviceID) && GetDeviceID(ref defaultDeviceID))
+                deviceInfo.DeviceID = defaultDeviceID;
+            else
+            {
+                deviceInfo.DeviceID = deviceID;
+                SetDeviceID(deviceID);
+            }
+
             return deviceInfo;
         }
 
+        private const NSStringEncoding Encoding = NSStringEncoding.UTF8;
+        private const string DeviceServiceId = "com.chairat.valuewallet.deviceid.service";
+        private const string DeviceAccountName = "com.chairat.valuewallet.deviceid.account";
+        private bool GetDeviceID(ref string deviceID)
+        {
+            bool result;
+            Security.SecStatusCode code;
+
+            // Query the record.
+            Security.SecRecord queryRec = new Security.SecRecord(Security.SecKind.GenericPassword) { Service = DeviceServiceId, Label = DeviceServiceId, Account = DeviceAccountName, Synchronizable = true };
+            queryRec = Security.SecKeyChain.QueryAsRecord(queryRec, out code);
+            if (code == Security.SecStatusCode.Success && queryRec != null && queryRec.Generic != null)
+            {
+                deviceID = NSString.FromData(queryRec.Generic, Encoding);
+                result = true;
+            }
+            else
+            {
+                deviceID = "";
+                result = false;
+            }
+
+            System.Diagnostics.Debug.WriteLine("GetDeviceID Security.SecStatusCode =>" + code);
+
+            return result;
+        }
+        private void SetDeviceID(string deviceID)
+        {
+            if (deviceID == null)
+                throw new ArgumentNullException("deviceID is null");
+
+            Security.SecStatusCode code = Security.SecKeyChain.Add(new Security.SecRecord(Security.SecKind.GenericPassword)
+            {
+                Service = DeviceServiceId,
+                Label = DeviceServiceId,
+                Account = DeviceAccountName,
+                ValueData = NSData.FromString(deviceID),
+                Generic = NSData.FromString(deviceID),
+                Accessible = Security.SecAccessible.AlwaysThisDeviceOnly,
+                Synchronizable = true
+            });
+
+            System.Diagnostics.Debug.WriteLine("SaveDeviceID Security.SecStatusCode =>" + code);
+
+        }
         private async ValueTask<bool> IsSupportSecureStorage()
         {
             try
@@ -80,6 +137,5 @@ namespace ValueWallet.iOS
                 return false;
             }
         }
-
     }
 }

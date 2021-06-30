@@ -30,6 +30,8 @@
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchI18n>other</MtouchI18n>
     <LangVersion>9.0</LangVersion>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -79,7 +81,6 @@
     <BundleResource Include="Resources\Fonts\EkkamaiNew.ttf" />
     <Compile Include="ViewRenderer\CustomPageRenderer.cs" />
     <Compile Include="RuntimeService\DeviceHardware.cs" />
-    <Compile Include="RuntimeService\BiometricsService.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />

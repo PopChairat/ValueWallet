@@ -16,41 +16,25 @@ namespace ValueWallet.Views.LoginNRegister
             BindingContext = this;
         }
 
-        void Button_Clicked(System.Object sender, System.EventArgs e)
+        async void Button_Clicked(System.Object sender, System.EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            bool isPass = await BiometricsService.IsPassAuthUser();
+
+            if (isPass)
             {
-               
-                FingerprintAuthenticationResult authResult = await CrossFingerprint.Current.AuthenticateAsync(new AuthenticationRequestConfiguration("Heads up!", "I would like to use your biometrics, please!"));
-
-                if (authResult.Authenticated)
-                {
-                    string a = CryptoManagerApp.EncryptData(userEntry.Text);
-                    dataLabel.Text = a;
-                }
-
-            });
+                BiometricsService.SetUserLogin(userEntry.Text, passEntry.Text, Domain.Entities.LoginBy.Biometric);
+            }
         }
 
-        void Button_Clicked_1(System.Object sender, System.EventArgs e)
+        async void Button_Clicked_1(System.Object sender, System.EventArgs e)
         {
-            Device.BeginInvokeOnMainThread(async () =>
+            bool isPass = await BiometricsService.IsPassAuthUser();
+
+            if (isPass)
             {
-
-                FingerprintAuthenticationResult authResult = await CrossFingerprint.Current.AuthenticateAsync(new AuthenticationRequestConfiguration("Heads up!", "I would like to use your biometrics, please!"));
-
-                if (authResult.Authenticated)
-                {
-                    //Models.BioProfileEntity dataInfo = await BiometricsService.GetPassword();
-
-                    // if (dataInfo != null)
-
-                    string a = CryptoManagerApp.DecryptData(dataLabel.Text);
-                    dataLabel.Text = a;
-                     //   = JsonConvert.SerializeObject(dataInfo);
-                }           
-
-            });
+                Models.BioProfileEntity userDto = await BiometricsService.GetUserLogin();
+                dataLabel.Text = JsonConvert.SerializeObject(userDto);
+            }
         }
     }
 }

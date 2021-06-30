@@ -12,9 +12,7 @@
     {
         None = 0,
         Password = 1,
-        Fingerprint = 2,
-        FaceId = 3,
-        BiometricDroid = 4,
-        PassCode = 5
+        Biometric = 2,
+        PinCode = 3
     }
 }

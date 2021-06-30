@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ValueWallet.Domain.IServices;
 using ValueWallet.Domain.Services;
+using ValueWallet.Models;
 
 namespace ValueWallet.Services.CoreService
 {
@@ -28,21 +29,10 @@ namespace ValueWallet.Services.CoreService
             return value;
         }
 
-        //public T DecryptData<T>()
-        //{
-        //    object PropertyValue =
-        //        if (Convert.GetTypeCode(PropertyValue) != TypeCode.Object)
-        //    {
-        //        string StringValue = Convert.ToString(PropertyValue);
-
-        //    }
-        //}
-
         private static void InitialService()
         {
             IServiceCollection services = new ServiceCollection()
-                .AddSingleton<ICryptographyManager>(new CryptographyManager());
-
+                .AddSingleton<ICryptographyManager>(new CryptographyManager(LocalDeviceInfo.CurrentDevice.DeviceID));
             serviceProvider = services.BuildServiceProvider();
         }
     }

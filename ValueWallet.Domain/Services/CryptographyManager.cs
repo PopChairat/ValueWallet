@@ -10,32 +10,74 @@ namespace ValueWallet.Domain.Services
 {
     public class CryptographyManager : ICryptographyManager
     {
-        private string secretKey = "fffffffffffhjhfkhfkhfhgfghfjhfghdfrtdrtsrtsrjdjljgljgjy";
-        //todo Set Salt
-        private byte[] saltBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private string secretKey = "";
 
-        public string DecryptData(string text)
+        private readonly byte[] saltBytes = new byte[] { 6, 8, 5, 7, 5, 2, 3, 0 };
+
+        private string UniqDevice { get; set; } = "ValueWalletProject"; //default UniqDevice
+
+        private const string _formatDate = "ddyyyyMMM";
+
+        private readonly int days = DateTime.DaysInMonth(DateTime.UtcNow.Year, DateTime.UtcNow.Month);
+
+        private string Key1
         {
-            return DecryptString(text);
+            get
+            {
+                if (days % 2 == 0) //even number เลขคู่
+                    return $"ZP$Dr*7D{days}&my%vvS+Even";
+                else
+                    return $"AM%6^+yF{days}vB^KjyjsOdd"; //Odd
+            }
         }
 
-        public string EncryptData(string text)
+        private string Key2
         {
-            return EncryptString(text);
+            get
+            {
+                if (days % 2 == 0) //even number เลขคู่
+                    return $"gBU*f-AG{days}Ta@e=E3$";
+                else
+                    return $"b9?kBm@UH{days}M&DP28#"; //Odd
+            }
         }
 
-        private void SetVectorKey()
+        public CryptographyManager(string uniqDevice)
         {
-
+            if (uniqDevice.IsValid())
+                UniqDevice = uniqDevice;
         }
 
-        private void SetKey()
+        public string DecryptData(string painText)
         {
+            return DecryptString(painText);
+        }
 
+        public string EncryptData(string painText)
+        {
+            return EncryptString(painText);
+        }
+
+        private void InitialKey()
+        {
+            if (UniqDevice.Length < 10)
+                UniqDevice += Key2;
+
+            string _date = DateTime.UtcNow.ToString(_formatDate);
+            string a = UniqDevice.Substring(2, 5);
+            string b = Key1;
+            string c = UniqDevice.Substring(0, 4);
+            string d = UniqDevice.Substring(6, 4);
+            string e = Key2;
+            string f = UniqDevice.Substring(3, 6);
+
+            secretKey = $"{a}{b}{c}{_date}{d}{e}{f}";
         }
 
         private string EncryptString(string text)
         {
+            InitialKey();
+
             byte[] baPwd = Encoding.UTF8.GetBytes(secretKey);
 
             // Hash the password with SHA256
@@ -60,6 +102,8 @@ namespace ValueWallet.Domain.Services
 
         private string DecryptString(string text)
         {
+            InitialKey();
+
             byte[] baPwd = Encoding.UTF8.GetBytes(secretKey);
 
             // Hash the password with SHA256
@@ -103,7 +147,7 @@ namespace ValueWallet.Domain.Services
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
 
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
                     AES.IV = key.GetBytes(AES.BlockSize / 8);
 
@@ -132,7 +176,7 @@ namespace ValueWallet.Domain.Services
                     AES.KeySize = 256;
                     AES.BlockSize = 128;
 
-                    var key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
+                    Rfc2898DeriveBytes key = new Rfc2898DeriveBytes(passwordBytes, saltBytes, 1000);
                     AES.Key = key.GetBytes(AES.KeySize / 8);
                     AES.IV = key.GetBytes(AES.BlockSize / 8);
 
@@ -148,11 +192,6 @@ namespace ValueWallet.Domain.Services
             }
 
             return decryptedBytes;
-        }
-
-        public T DecryptData<T>()
-        {
-            throw new NotImplementedException();
         }
     }
 }
