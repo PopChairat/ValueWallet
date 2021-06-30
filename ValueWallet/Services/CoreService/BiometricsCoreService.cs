@@ -1,40 +1,47 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Plugin.Fingerprint;
+using Plugin.Fingerprint.Abstractions;
 using ValueWallet.Domain.Entities;
 using ValueWallet.Models;
-using ValueWallet.Services.IService;
 using Xamarin.Forms;
 
 namespace ValueWallet.Services.CoreService
 {
     public class BiometricsService
     {
-        public static Task<BioProfileEntity> GetPassword()
+        public async static Task<BioProfileEntity> GetUserLogin()
         {
-            return DependencyService.Get<IBiometricsService>().GetSecretBio();
+            string userEncrypt = await KeyAppManageService.GetData(KeyAppType.UserInfo);
+            string user = CryptoManagerApp.DecryptData(userEncrypt);
+            BioProfileEntity bioProfile = JsonConvert.DeserializeObject<BioProfileEntity>(user);
+            return bioProfile;
         }
 
-        public static bool IsBioPermissionGranted()
+        public async static ValueTask<bool> IsPassAuthUser()
         {
-            return DependencyService.Get<IBiometricsService>().IsBioPermissionGranted();
+            bool result = false;
+
+            FingerprintAuthenticationResult authResult = await CrossFingerprint.Current.AuthenticateAsync(new AuthenticationRequestConfiguration("Heads up!", "I would like to use your biometrics, please!"));
+
+            if (authResult.Authenticated)
+                result = true;
+
+            return result;
         }
 
         public static void RemoveUserLogin()
         {
-            DependencyService.Get<IBiometricsService>().RemoveUserLogin();
+            KeyAppManageService.RemoveData(KeyAppType.UserInfo);
         }
 
         public static void SetUserLogin(string username, string password, LoginBy loginType)
         {
-            try
-            {
-                BioProfileEntity userInfo = new BioProfileEntity() { Username = username, Password = password, LoginBy = loginType };
-                DependencyService.Get<IBiometricsService>().SetUserLogin(userInfo);
-            }
-            catch(Exception ex)
-            {
-               
-            }
+            BioProfileEntity userInfo = new() { Username = username, Password = password, LoginBy = loginType };
+            string user = JsonConvert.SerializeObject(userInfo);
+            string userEncrypt = CryptoManagerApp.EncryptData(user);
+            KeyAppManageService.SetData(KeyAppType.UserInfo, userEncrypt);
         }
     }
 }
