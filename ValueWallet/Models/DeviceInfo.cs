@@ -23,14 +23,12 @@
         public string AppVersion { get; set; }
         public string DeviceModel { get; set; }
         public string DeviceID { get; set; }
-        public string ID2 { get; set; }
+        public string DeviceSerial { get; set; }
 
         public double ScreenScale { get; set; }
         public double ScreenWidth { get; set; }
         public double ScreenWidthPixels { get; set; }
         public double ScreenHeightPixels { get; set; }
         public double ScreenHeight { get; set; }
-
-
     }
 }

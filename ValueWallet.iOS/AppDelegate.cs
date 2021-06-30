@@ -23,13 +23,13 @@ namespace ValueWallet.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
+            LocalDeviceInfo.CurrentDevice = GetLocalDeviceInfo();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
 
-        private LocalDeviceInfo GetDeviceInfo()
+        private LocalDeviceInfo GetLocalDeviceInfo()
         {
             LocalDeviceInfo deviceInfo = new(Models.Platform.iOS);
 
@@ -72,7 +72,7 @@ namespace ValueWallet.iOS
             else
             {
                 deviceInfo.DeviceID = deviceID;
-                SaveDeviceID(deviceID);
+                SetDeviceID(deviceID);
             }
 
             return deviceInfo;
@@ -104,7 +104,7 @@ namespace ValueWallet.iOS
 
             return result;
         }
-        private void SaveDeviceID(string deviceID)
+        private void SetDeviceID(string deviceID)
         {
             if (deviceID == null)
                 throw new ArgumentNullException("deviceID is null");

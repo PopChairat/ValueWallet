@@ -32,7 +32,7 @@ namespace ValueWallet.Droid
                 = LayoutInDisplayCutoutMode.Never;
             }
 
-            LocalDeviceInfo.CurrentDevice = GetDeviceInfo();
+            LocalDeviceInfo.CurrentDevice = GetLocalDeviceInfo();
 
             LoadApplication(new App());
         }
@@ -44,7 +44,7 @@ namespace ValueWallet.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
-        private LocalDeviceInfo GetDeviceInfo()
+        private LocalDeviceInfo GetLocalDeviceInfo()
         {
             LocalDeviceInfo deviceInfo = new(Models.Platform.Android);
 
@@ -56,6 +56,16 @@ namespace ValueWallet.Droid
             deviceInfo.AppVersion = packageInfopInfo.VersionName;
             deviceInfo.Brand = Build.Brand;
             deviceInfo.DeviceModel = Build.Model.StartsWith(Build.Brand, StringComparison.InvariantCulture) ? Build.Model : (Build.Brand + " " + Build.Model);
+            deviceInfo.DeviceSerial = Build.Serial;
+
+            try
+            {
+                deviceInfo.DeviceID = Android.Provider.Settings.Secure.GetString(ContentResolver, Android.Provider.Settings.Secure.AndroidId);
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine($"can't get DeviceID : {e}");
+            }
 
             DisplayMetrics metrics = new DisplayMetrics();
             WindowManager.DefaultDisplay.GetMetrics(metrics);
