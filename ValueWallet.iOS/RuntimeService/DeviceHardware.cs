@@ -2,6 +2,7 @@
 using System.Runtime.InteropServices;
 using Foundation;
 using ObjCRuntime;
+using UIKit;
 
 namespace ValueWallet.iOS.RuntimeService
 {
@@ -315,6 +316,30 @@ namespace ValueWallet.iOS.RuntimeService
                 return "Simulator";
 
             return (hardware == "" ? "Unknown" : hardware);
+        }
+
+        public static bool IsNotchDevice()
+        {
+            bool _isNotch = false;
+
+            try
+            {
+                if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0) && UIApplication.SharedApplication.KeyWindow != null)
+                {
+                    UIEdgeInsets insets = UIApplication.SharedApplication.Windows[0].SafeAreaInsets;
+                    if (insets.Top > 0)
+                    {
+                        // We have a notch
+                        _isNotch = true;
+                    }
+                }
+            }
+            catch
+            {
+                _isNotch = false;
+            }
+
+            return _isNotch;
         }
     }
 }

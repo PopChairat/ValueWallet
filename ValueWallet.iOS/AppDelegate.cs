@@ -26,6 +26,8 @@ namespace ValueWallet.iOS
             LocalDeviceInfo.CurrentDevice = GetLocalDeviceInfo();
             LoadApplication(new App());
 
+            LocalDeviceInfo.CurrentDevice.IsNotchIosDevice = RuntimeService.DeviceHardware.IsNotchDevice();
+
             return base.FinishedLaunching(app, options);
         }
 
@@ -131,7 +133,7 @@ namespace ValueWallet.iOS
 
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Possible that device doesn't support secure storage on device.
                 return false;
