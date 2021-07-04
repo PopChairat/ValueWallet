@@ -1,4 +1,6 @@
-﻿namespace ValueWallet.Models
+﻿using Xamarin.Forms;
+
+namespace ValueWallet.Models
 {
     public class LocalDeviceInfo
     {
@@ -30,5 +32,6 @@
         public double ScreenWidthPixels { get; set; }
         public double ScreenHeightPixels { get; set; }
         public double ScreenHeight { get; set; }
+
     }
 }
