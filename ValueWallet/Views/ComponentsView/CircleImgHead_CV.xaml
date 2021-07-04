@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cv="clr-namespace:ValueWallet.Views.ComponentsView"
+    xmlns:local ="clr-namespace:ValueWallet;assembly=ValueWallet"
+    x:Class="ValueWallet.Views.ComponentsView.CircleImgHead_CV">
+    <ContentView.Content>
+        <Grid x:Name="MainGrid" ColumnDefinitions="Auto,*"
+              RowDefinitions="Auto,Auto,Auto">
+
+            <BoxView x:Name="NotchBx" Grid.Row="0" HorizontalOptions="FillAndExpand"
+                     HeightRequest="45"/>
+
+            <cv:CloseNavigation_CV Grid.Row="1" Grid.Column="0" />
+
+            <Label Grid.Column="1" Grid.Row="1" Margin="0,0,30,0"
+                   Style="{DynamicResource Style-Label-Detail-nv}"
+                   Text="{Binding Text}"
+                   HorizontalTextAlignment="End"
+                   VerticalTextAlignment="Center"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="EndAndExpand"/>
+
+            <AbsoluteLayout Grid.Row="2" Grid.ColumnSpan="2"
+                            HeightRequest="120">
+
+                <BoxView BackgroundColor="White"
+                         CornerRadius="30" Margin="0"
+                         AbsoluteLayout.LayoutBounds="0.5,1.5,1,100"
+                         AbsoluteLayout.LayoutFlags="PositionProportional,WidthProportional"/>
+
+                 <Image Source="{local:ImagePcl ValueWallet.Images.CommonImg.Avatar.png}"
+                       AbsoluteLayout.LayoutBounds="0.5,-1,105,105"
+                       AbsoluteLayout.LayoutFlags="PositionProportional"/>
+
+            </AbsoluteLayout>
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>
