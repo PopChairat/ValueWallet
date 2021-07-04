@@ -25,20 +25,20 @@ namespace ValueWallet.iOS.ViewRenderer
                     OverrideUserInterfaceStyle = UIUserInterfaceStyle.Light;
                 }
 
-                if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
-                {
-                    UIEdgeInsets insets = UIApplication.SharedApplication.Windows[0].SafeAreaInsets;
-                    Thickness currentThickness = currentPage.Padding;
-                    nfloat margin = 20f;
-                    if (insets.Top > 0)
-                    {
-                        // We have a notch
-                        margin = 35f;
-                    }
+                //if (UIDevice.CurrentDevice.CheckSystemVersion(11, 0))
+                //{
+                //    UIEdgeInsets insets = UIApplication.SharedApplication.Windows[0].SafeAreaInsets;
+                //    Thickness currentThickness = currentPage.Padding;
+                //    nfloat margin = 20f;
+                //    if (insets.Top > 0)
+                //    {
+                //        // We have a notch
+                //        margin = 35f;
+                //    }
 
-                    if (currentThickness.Top < margin)
-                        currentPage.Padding = new Thickness(currentThickness.Left, margin, currentThickness.Right, currentThickness.Bottom);
-                }
+                //    if (currentThickness.Top < margin)
+                //        currentPage.Padding = new Thickness(currentThickness.Left, margin, currentThickness.Right, currentThickness.Bottom);
+                //}
             }
         }
 

@@ -81,6 +81,7 @@
     <BundleResource Include="Resources\Fonts\EkkamaiNew.ttf" />
     <Compile Include="ViewRenderer\CustomPageRenderer.cs" />
     <Compile Include="RuntimeService\DeviceHardware.cs" />
+    <Compile Include="ViewRenderer\LabelCustomRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
