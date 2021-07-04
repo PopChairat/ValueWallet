@@ -1,4 +1,5 @@
 ﻿using System;
+using ValueWallet.Services.CoreService;
 using ValueWallet.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,9 +10,12 @@ namespace ValueWallet
     {
         public App()
         {
+
             InitializeComponent();
 
-            MainPage = new Views.LoginNRegister.LoginNewUserPage();
+            ControlStyleService.RegisterStyles();
+
+            MainPage = new Views.RegisterNLogin.LoginNewUserPage();
         }
 
         protected override void OnStart()

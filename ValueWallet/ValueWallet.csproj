@@ -33,7 +33,9 @@
     <Folder Include="Images\OnboardImg\" />
     <Folder Include="Views\CommonViews\" />
     <Folder Include="ViewModels\CommonLogics\" />
-    <Folder Include="Views\LoginNRegister\" />
+    <Folder Include="Views\ComponentsView\" />
+    <Folder Include="Images\CommonImg\" />
+    <Folder Include="Views\RegisterNLogin\" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Resources\" />
@@ -49,12 +51,18 @@
     <None Remove="Plugin.Fingerprint" />
     <None Remove="Views\CommonViews\" />
     <None Remove="ViewModels\CommonLogics\" />
-    <None Remove="Views\LoginNRegister\" />
     <None Remove="Microsoft.Extensions.DependencyInjection" />
+    <None Remove="Views\ComponentsView\" />
+    <None Remove="Images\CommonImg\" />
+    <None Remove="Images\CommonImg\IconX.png" />
+    <None Remove="Views\RegisterNLogin\" />
+    <None Remove="Images\CommonImg\Avatar.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Images\OnboardImg\LogoW.png" />
     <EmbeddedResource Include="Images\OnboardImg\VmString.png" />
+    <EmbeddedResource Include="Images\CommonImg\IconX.png" />
+    <EmbeddedResource Include="Images\CommonImg\Avatar.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="Resources\AppResources.resx">
