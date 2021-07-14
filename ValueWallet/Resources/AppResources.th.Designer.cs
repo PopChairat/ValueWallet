@@ -82,5 +82,47 @@ namespace ValueWallet.Resources {
                 return ResourceManager.GetString("DetailOnBoardingStep3", resourceCulture);
             }
         }
+        
+        internal static string Login_Forgot {
+            get {
+                return ResourceManager.GetString("Login_Forgot", resourceCulture);
+            }
+        }
+        
+        internal static string Login_SignIn {
+            get {
+                return ResourceManager.GetString("Login_SignIn", resourceCulture);
+            }
+        }
+        
+        internal static string Login_SignIn_Detail {
+            get {
+                return ResourceManager.GetString("Login_SignIn_Detail", resourceCulture);
+            }
+        }
+        
+        internal static string Login_Phone {
+            get {
+                return ResourceManager.GetString("Login_Phone", resourceCulture);
+            }
+        }
+        
+        internal static string Login_Password {
+            get {
+                return ResourceManager.GetString("Login_Password", resourceCulture);
+            }
+        }
+        
+        internal static string Login_SignIn_Btn {
+            get {
+                return ResourceManager.GetString("Login_SignIn_Btn", resourceCulture);
+            }
+        }
+        
+        internal static string Login_Regist_Btn {
+            get {
+                return ResourceManager.GetString("Login_Regist_Btn", resourceCulture);
+            }
+        }
     }
 }
